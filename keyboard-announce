@@ -1,0 +1,78 @@
+                                                                                 local Players=game:   
+                                                                        GetService("Players");local ReplicatedStorage=  
+                                                                    game:GetService("ReplicatedStorage");local TweenService=game: 
+                                                                GetService("TweenService");local Debris=game:GetService("Debris");local 
+                                                             UserInputService=game:GetService("UserInputService");local LocalPlayer=      
+                                                          Players.LocalPlayer;local PlayerGui=LocalPlayer:WaitForChild("PlayerGui");local   
+                                                        AdminAnnounceGui=PlayerGui:WaitForChild("AdminAnnounce");local MainFrame=             
+                                                      AdminAnnounceGui:WaitForChild("MainFrame");local NotificationFrame=ReplicatedStorage:     
+                                                    WaitForChild("NotificationFrame");local rolesTable={Creator={Color="#ff0000",Prefix=          
+                                                  "[CREATOR]"},HeadManager={Color="#a855f7",Prefix="[COO]"},Admin={Color="#1de5ff",Prefix="[ADMIN]" 
+                                                  },MarketingLead={Color="#ff8c00",Prefix="[MARKETING LEAD]"},Scripter={Color="#3b82f6",Prefix=       
+                                                "[SCRIPTER]"},Builder={Color="#dd994b",Prefix="[BUILDER]"},QAManager={Color="#ffa500",Prefix=           
+                                                "[QA MANAGER]"},AssistantBoard={Color="#ffffff",Prefix="[ASSISTANT BOARD]"},Moderator={Color="#1de5ff",   
+                                              Prefix="[ADMIN]"}};if PlayerGui:FindFirstChild("AdminControlPanelGui") then PlayerGui.AdminControlPanelGui:   
+                                              Destroy();end local ControlGui=Instance.new("ScreenGui");ControlGui.Name="AdminControlPanelGui";ControlGui.   
+                                            ResetOnSpawn=false;ControlGui.ZIndexBehavior=Enum.ZIndexBehavior.Sibling;ControlGui.Parent=PlayerGui;local        
+                                            PanelWindow=Instance.new("Frame");PanelWindow.Name="PanelWindow";PanelWindow.Size=UDim2.new(0,350,0,160);           
+                                          PanelWindow.Position=UDim2.new(0.05,0,0.4,0);PanelWindow.BackgroundColor3=Color3.fromRGB(15,15,15);PanelWindow.         
+                                          BorderSizePixel=0;PanelWindow.Parent=ControlGui;local pwCorner=Instance.new("UICorner");pwCorner.CornerRadius=UDim.new(0, 
+                                          12);pwCorner.Parent=PanelWindow;local pwStroke=Instance.new("UIStroke");pwStroke.Color=Color3.fromRGB(45,45,45);pwStroke.   
+                                          Thickness=1.5;pwStroke.Parent=PanelWindow;local TitleLabel=Instance.new("TextLabel");TitleLabel.Name="TitleLabel";          
+                                        TitleLabel.Size=UDim2.new(1,0,0,30);TitleLabel.BackgroundColor3=Color3.fromRGB(22,22,22);TitleLabel.BorderSizePixel=0;          
+                                        TitleLabel.Text=" ADMIN PANEL (MADE BY LEEWALKY)";TitleLabel.         --[[==============================]]TextColor3=Color3.      
+                                        fromRGB(255,80,80);TitleLabel.Font=Enum.Font.GothamBold;    --[[============================================]]TitleLabel.TextSize 
+                                        =12;TitleLabel.TextXAlignment=Enum.TextXAlignment.Left; --[[======================================================]]TitleLabel.     
+                                      Parent=PanelWindow;local tlCorner=Instance.new(       --[[==========================================================]]"UICorner");      
+                                      tlCorner.CornerRadius=UDim.new(0,12);tlCorner.      --[[==============================================================]]Parent=         
+                                      TitleLabel;local ContentFrame=Instance.new("Frame") --[[================================================================]];ContentFrame.  
+                                      Name="ContentFrame";ContentFrame.Size=UDim2.new(1,0 --[[==================================================================]],1, -30);     
+                                      ContentFrame.Position=UDim2.new(0,0,0,30);          --[[==================================================================]]ContentFrame.     
+                                    BackgroundTransparency=1;ContentFrame.Parent=         --[[====================================================================]]PanelWindow;  
+                    local UIList=Instance.new("UIListLayout");UIList.Padding=UDim.new(0,8 --[[====================================================================]]);UIList.       
+              SortOrder=Enum.SortOrder.LayoutOrder;UIList.Parent=ContentFrame;local       --[[======================================================================]]cpPadding=    
+            Instance.new("UIPadding");cpPadding.PaddingLeft=UDim.new(0,12);cpPadding.     --[[======================================================================]]PaddingRight= 
+          UDim.new(0,12);cpPadding.PaddingTop=UDim.new(0,12);cpPadding.Parent=            --[[======================================================================]]ContentFrame; 
+        local function createModernInput(placeholder,layoutOrder) local box=Instance.new( --[[======================================================================]]"TextBox");   
+        box.Size=UDim2.new(1,0,0.28,0);box.BackgroundColor3=Color3.fromRGB(25,25,25);box. --[[======================================================================]]TextColor3=   
+      Color3.fromRGB(255,255,255);box.PlaceholderText=placeholder;box.PlaceholderColor3=  --[[======================================================================]]Color3.       
+      fromRGB(100,100,100);box.Font=Enum.Font.GothamMedium;box.TextSize=12;box.LayoutOrder= --[[==================================================================]]layoutOrder;box 
+      .ClearTextOnFocus=false;box.Parent=ContentFrame;local corner=Instance.new("UICorner") --[[================================================================]];corner.          
+    CornerRadius=UDim.new(0,6);corner.Parent=box;local stroke=Instance.new("UIStroke");     --[[==============================================================]]stroke.Color=     
+    Color3.fromRGB(40,40,40);stroke.Thickness=1;stroke.Parent=box;box.Focused:Connect(        --[[==========================================================]]function()          
+    TweenService:Create(stroke,TweenInfo.new(0.2),{Color=Color3.fromRGB(255,80,80)}):Play();end --[[====================================================]]);box.FocusLost:Connect 
+    (function() TweenService:Create(stroke,TweenInfo.new(0.2),{Color=Color3.fromRGB(40,40,40)}):  --[[==============================================]]Play();end);return box;   
+    end local InputRole=createModernInput("Rolle (Creator, Admin...)",1);local InputMessage=          --[[====================================]]createModernInput(            
+    "Nachricht...",2);local SendButton=Instance.new("TextButton");SendButton.Size=UDim2.new(1,0,0.3,0);   --[[========================]]SendButton.BackgroundColor3=Color3.   
+    fromRGB(255,60,60);SendButton.Font=Enum.Font.GothamBold;SendButton.Text="LOKAL ANKÜNDIGEN";SendButton.TextColor3=Color3.fromRGB(255,255,255);SendButton.TextSize=12;    
+  SendButton.LayoutOrder=3;SendButton.Parent=ContentFrame;local btnCorner=Instance.new("UICorner");btnCorner.CornerRadius=UDim.new(0,6);btnCorner.Parent=SendButton;      
+  SendButton.MouseEnter:Connect(function() TweenService:Create(SendButton,TweenInfo.new(0.2),{BackgroundColor3=Color3.fromRGB(255,90,90)}):Play();end);SendButton.      
+  MouseLeave:Connect(function() TweenService:Create(SendButton,TweenInfo.new(0.2),{BackgroundColor3=Color3.fromRGB(255,60,60)}):Play();end);InputRole.Text="Creator";     
+  local dragging,dragInput,dragStart,startPos;local function update(input) local delta=input.Position-dragStart ;PanelWindow.Position=UDim2.new(startPos.X.Scale,startPos 
+  .X.Offset + delta.X ,startPos.Y.Scale,startPos.Y.Offset + delta.Y );end PanelWindow.InputBegan:Connect(function(input) if ((input.UserInputType==Enum.UserInputType.    
+  MouseButton1) or (input.UserInputType==Enum.UserInputType.Touch)) then dragging=true;dragStart=input.Position;startPos=PanelWindow.Position;input.Changed:Connect(      
+  function() if (input.UserInputState==Enum.UserInputState.End) then dragging=false;end end);end end);PanelWindow.InputChanged:Connect(function(input) if ((input.        
+  UserInputType==Enum.UserInputType.MouseMovement) or (input.UserInputType==Enum.UserInputType.Touch)) then dragInput=input;end end);UserInputService.InputChanged:       
+  Connect(function(input) if ((input==dragInput) and dragging) then update(input);end end);local function getGradients(p1) local t={};for i,v in ipairs(p1:GetDescendants 
+  ()) do if v:IsA("UIGradient") then table.insert(t,{obj=v,original=v.Transparency});end end return t;end local function getAllVisuals(p1) local t={};for i,v in ipairs(  
+  p1:GetDescendants()) do if v:IsA("UIStroke") then table.insert(t,{prop="Transparency",obj=v});continue;end if (v:IsA("TextLabel") or v:IsA("TextButton")) then table.   
+  insert(t,{prop="TextTransparency",obj=v});if (v.BackgroundTransparency<1) then table.insert(t,{prop="BackgroundTransparency",obj=v});end continue;end if (v:IsA(          
+  "ImageLabel") or v:IsA("ImageButton")) then table.insert(t,{prop="ImageTransparency",obj=v});if (v.BackgroundTransparency<1) then table.insert(t,{prop=                   
+  "BackgroundTransparency",obj=v});end continue;end if (v:IsA("Frame") and (v.BackgroundTransparency<1)) then table.insert(t,{prop="BackgroundTransparency",obj=v});end end 
+   if (p1:IsA("Frame") and (p1.BackgroundTransparency<1)) then table.insert(t,{prop="BackgroundTransparency",obj=p1});end return t;end local function showAnnouncement(p1,  
+  p2,p3,p4,p5) local v2=NotificationFrame:Clone();v2.ZIndex=100;local listLayout=v2:FindFirstChildOfClass("UIListLayout");if listLayout then listLayout.Padding=UDim.new(0, 
+  4);end local framePadding=v2:FindFirstChildOfClass("UIPadding");if framePadding then framePadding.PaddingLeft=UDim.new(0,6);end local Avatar=v2:FindFirstChild("Avatar"); 
+  if (Avatar and Avatar:IsA("ImageLabel")) then Avatar.ZIndex=101;Avatar.Size=UDim2.new(0.8,0,0.8,0);Avatar.SizeConstraint=Enum.SizeConstraint.RelativeYY;if p3 then local  
+  ok,result=pcall(function() return Players:GetUserThumbnailAsync(p3,Enum.ThumbnailType.HeadShot,Enum.ThumbnailSize.Size100x100);end);if (ok and result) then Avatar.Image= 
+  result;end end end local Text=v2:FindFirstChild("Text");if Text then Text.ZIndex=101;Text.RichText=true;Text.Size=UDim2.new(1, -50,1,0);local v3=p2 or "Admin" ;local v4= 
+  (p4 and (v3   .. "\238\128\128")) or v3 ;local v5=function() if p5 then return rolesTable[p5];else return nil;end end();if v5 then Text.Text=string.format(               
+  '<font color=\"%s\">%s</font> <font color=\"rgb(85,170,255)\"><b>%s</b></font> : %s',v5.Color,v5.Prefix,v4,p1);else Text.Text='<font color=\"rgb(85,170,255)\"><b>'   ..  
+  v4   .. "</b></font> : "   .. p1 ;end end local v6=getAllVisuals(v2);local v7=getGradients(v2);local t2={};for i,v in ipairs(v6) do t2[i]=v.obj[v.prop];v.obj[v.prop]=1;  
+  end local v8=NumberSequence.new(1);for i,v in ipairs(v7) do v.obj.Transparency=v8;end v2.Parent=MainFrame;local Sound=Instance.new("Sound");Sound.SoundId=                
+  "rbxassetid://98797174600699";Sound.Volume=0.4;Sound.Parent=PlayerGui;Sound:Play();Debris:AddItem(Sound,5);local v9=TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.       
+  EasingDirection.Out);for i,v in ipairs(v6) do TweenService:Create(v.obj,v9,{[v.prop]=t2[i]}):Play();end for i,v in ipairs(v7) do v.obj.Transparency=v.original;end task 
+  .delay(10,function() local v1_tween=TweenInfo.new(0.5,Enum.EasingStyle.Quad,Enum.EasingDirection.In);for i,v in ipairs(v6) do TweenService:Create(v.obj,v1_tween,{[v.   
+    prop]=1}):Play();end for i,v in ipairs(v7) do v.obj.Transparency=v8;end task.delay(0.5,function() if v2 then v2:Destroy();end end);end);end SendButton.               
+    MouseButton1Click:Connect(function() local msgText=InputMessage.Text;if ((msgText=="") or (string.gsub(msgText," ","")=="")) then return;end local senderName=        
+    "Secret_Lokii";local targetUserId="3845375404";local chosenRole=InputRole.Text;local isOwner=chosenRole=="Creator" ;if  not rolesTable[chosenRole] then chosenRole=   
+    nil;end task.spawn(showAnnouncement,msgText,senderName,targetUserId,isOwner,chosenRole);InputMessage.Text="";end);
